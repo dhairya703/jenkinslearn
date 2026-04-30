@@ -1,7 +1,7 @@
 pipeline {
     agent any
 environment {
-    ENV = "dev"
+    API_KEY = credentials('my-api-key')
 }
     stages {
 
