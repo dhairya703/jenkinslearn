@@ -27,6 +27,14 @@ environment {
         bat 'echo %API_KEY%'
     }
 }
+           stage('Use Secret') {
+            steps {
+                withCredentials([string(credentialsId: 'my-api-key', variable: 'API_KEY')]) {
+                    bat 'echo %API_KEY%'
+                }
+            }
+        }
+    }
 
         stage('Archive Artifacts') {
             steps {
