@@ -2,15 +2,28 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone') {
+
+        stage('Install Dependencies') {
             steps {
-                echo 'Cloning happens automatically in pipeline job'
+                bat 'pip install -r requirements.txt'
             }
         }
 
-        stage('Build') {
+        stage('Run Tests') {
+            steps {
+                bat 'pytest'
+            }
+        }
+
+        stage('Run App') {
             steps {
                 bat 'python app.py'
+            }
+        }
+
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: '*.py', fingerprint: true
             }
         }
     }
