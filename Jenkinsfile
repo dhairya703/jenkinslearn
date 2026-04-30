@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+environment {
+    ENV = "dev"
+}
     stages {
 
         stage('Install Dependencies') {
@@ -20,6 +22,11 @@ pipeline {
                 bat 'python app.py'
             }
         }
+        stage('Check Env') {
+    steps {
+        bat 'echo %ENV%'
+    }
+}
 
         stage('Archive Artifacts') {
             steps {
