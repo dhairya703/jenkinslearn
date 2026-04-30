@@ -1,8 +1,5 @@
 pipeline {
     agent any
-environment {
-    API_KEY = credentials('my-api-key')
-}
     stages {
 
         stage('Install Dependencies') {
@@ -34,7 +31,7 @@ environment {
                 }
             }
         }
-    }
+    
 
         stage('Archive Artifacts') {
             steps {
