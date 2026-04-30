@@ -24,7 +24,7 @@ environment {
         }
         stage('Check Env') {
     steps {
-        bat 'echo %ENV%'
+        bat 'echo %API_KEY%'
     }
 }
 
