@@ -5,13 +5,13 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t my-app:latest .'
+                sh 'docker build -t my-app:latest .'
             }
         }
 
         stage('Run Container') {
             steps {
-                bat 'docker run my-app:latest'
+                sh 'docker run --rm my-app:latest'
             }
         }
     }
