@@ -1,41 +1,17 @@
 pipeline {
     agent any
+
     stages {
 
-        stage('Install Dependencies') {
+        stage('Build Docker Image') {
             steps {
-                bat 'pip install -r requirements.txt'
+                bat 'docker build -t my-app:latest .'
             }
         }
 
-        stage('Run Tests') {
+        stage('Run Container') {
             steps {
-                bat 'pytest'
-            }
-        }
-
-        stage('Run App') {
-            steps {
-                bat 'python app.py'
-            }
-        }
-        stage('Check Env') {
-    steps {
-        bat 'echo %API_KEY%'
-    }
-}
-           stage('Use Secret') {
-            steps {
-                withCredentials([string(credentialsId: 'my-api-key', variable: 'API_KEY')]) {
-                    bat 'echo %API_KEY%'
-                }
-            }
-        }
-    
-
-        stage('Archive Artifacts') {
-            steps {
-                archiveArtifacts artifacts: '*.py', fingerprint: true
+                bat 'docker run my-app:latest'
             }
         }
     }
