@@ -1,9 +1,8 @@
-FROM python:3.11
+FROM jenkins/jenkins:lts
 
-WORKDIR /app
+USER root
 
-COPY . .
+RUN apt-get update && \
+    apt-get install -y docker.io
 
-RUN pip install -r requirements.txt
-
-CMD ["python", "app.py"]
+USER jenkins
